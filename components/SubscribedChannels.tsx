@@ -132,7 +132,9 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <h2 className="font-bold text-center mb-4">Common Channels</h2>
+          <h2 className="text-xl font-bold text-center mb-4">
+            Common Channels
+          </h2>
           <ul className="list-inside rounded-lg p-4 bg-base-200 shadow-md">
             {commonChannels.map((channel, index) => (
               <li
@@ -156,8 +158,8 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
           </ul>
         </div>
         <div>
-          <h2 className="font-bold text-center mb-4">
-            {handle1 ? handle1 + "'s Unique Channels" : "My Channels"}
+          <h2 className="text-xl font-bold text-center mb-4">
+            {handle1 ? handle1 + "'s Channels" : "My Channels"}
           </h2>
           <ul className="list-inside rounded-lg p-4 bg-base-200 shadow-md">
             {uniqueChannels1.map((channel, index) => (
@@ -181,9 +183,9 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
             ))}
           </ul>
         </div>
-        <div className="">
-          <h2 className="font-bold text-center mb-4">
-            {handle2 ? handle2 + "'s Unique Channels" : "Their Channels"}
+        <div className="md:col-span-2 md:col-start-2">
+          <h2 className="text-2xl font-bold text-center mb-4">
+            {handle2 ? handle2 + "'s Channels" : "Their Channels"}
           </h2>
           <ul className="list-inside rounded-lg p-4 bg-base-200 shadow-lg">
             {uniqueChannels2.map((channel, index) => (
