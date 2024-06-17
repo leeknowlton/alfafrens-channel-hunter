@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Head from "next/head";
 import FIDForm from "../components/FIDForm";
@@ -36,9 +36,11 @@ const Home: React.FC = () => {
         Welcome to AlfaFrens Channel Hunt
       </h1>
       <FIDForm onSubmit={handleFormSubmit} />
-      {fid1 && fid2 && (
-        <SubscribedChannels fid1={fid1} fid2={fid2} first={20} skip={0} />
-      )}
+      <Suspense fallback={<p>Loading...</p>}>
+        {fid1 && fid2 && (
+          <SubscribedChannels fid1={fid1} fid2={fid2} first={20} skip={0} />
+        )}
+      </Suspense>
     </div>
   );
 };
