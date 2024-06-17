@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 interface Channel {
   title: string;
   profileimgurl: string;
+  channel: object;
 }
 
 interface ApiResponse {
@@ -14,20 +15,20 @@ interface ApiResponse {
 }
 
 interface SubscribedChannelsProps {
-  myFid: string;
-  theirFid: string;
+  fid1: string;
+  fid2: string;
   first: number;
   skip: number;
 }
 
 const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
-  myFid,
-  theirFid,
+  fid1,
+  fid2,
   first,
   skip,
 }) => {
-  const [myChannels, setMyChannels] = useState<Channel[]>([]);
-  const [theirChannels, setTheirChannels] = useState<Channel[]>([]);
+  const [channels1, setChannels1] = useState<Channel[]>([]);
+  const [channels2, setChannels2] = useState<Channel[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -58,13 +59,13 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
 
     async function fetchData() {
       try {
-        const [myChannelsData, theirChannelsData] = await Promise.all([
-          fetchChannels(myFid),
-          fetchChannels(theirFid),
+        const [channels1Data, channels2Data] = await Promise.all([
+          fetchChannels(fid1),
+          fetchChannels(fid2),
         ]);
 
-        setMyChannels(myChannelsData);
-        setTheirChannels(theirChannelsData);
+        setChannels1(channels1Data);
+        setChannels2(channels2Data);
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
@@ -77,23 +78,25 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
     }
 
     fetchData();
-  }, [myFid, theirFid, first, skip]);
+  }, [fid1, fid2, first, skip]);
 
   if (loading) return <p className="text-center text-blue-500">Loading...</p>;
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
-  const myChannelTitles = myChannels.map((channel) => channel.title);
-  const theirChannelTitles = theirChannels.map((channel) => channel.title);
+  const channelTitles1 = channels1.map((channel) => channel.title);
+  const channelTitles2 = channels2.map((channel) => channel.title);
 
-  const commonChannels = myChannels.filter((channel) =>
-    theirChannelTitles.includes(channel.title)
+  const commonChannels = channels1.filter((channel) =>
+    channelTitles2.includes(channel.title)
   );
-  const uniqueMyChannels = myChannels.filter(
-    (channel) => !theirChannelTitles.includes(channel.title)
+  const uniqueChannels1 = channels1.filter(
+    (channel) => !channelTitles2.includes(channel.title)
   );
-  const uniqueTheirChannels = theirChannels.filter(
-    (channel) => !myChannelTitles.includes(channel.title)
+  const uniqueChannels2 = channels2.filter(
+    (channel) => !channelTitles1.includes(channel.title)
   );
+
+  console.log(uniqueChannels2);
 
   return (
     <div className="container mx-auto p-4">
@@ -116,7 +119,12 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
                   alt={channel.title}
                   className="w-10 h-10 rounded-full mr-4"
                 />
-                <span>{channel.title}</span>
+                <a
+                  href={`https://alfafrens.com/channel/${channel.channel?.id}`}
+                  target="_blank"
+                >
+                  {channel.title}
+                </a>
               </li>
             ))}
           </ul>
@@ -124,7 +132,7 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
         <div>
           <h2 className="text-xl font-bold text-center mb-4">My Channels</h2>
           <ul className="list-inside rounded-lg p-4">
-            {uniqueMyChannels.map((channel, index) => (
+            {uniqueChannels1.map((channel, index) => (
               <li
                 key={index}
                 className="flex items-center py-2 border-b last:border-0"
@@ -134,7 +142,12 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
                   alt={channel.title}
                   className="w-10 h-10 rounded-full mr-4"
                 />
-                <span>{channel.title}</span>
+                <a
+                  href={`https://alfafrens.com/channel/${channel.channel?.id}`}
+                  target="_blank"
+                >
+                  {channel.title}
+                </a>{" "}
               </li>
             ))}
           </ul>
@@ -142,7 +155,7 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
         <div>
           <h2 className="text-xl font-bold text-center mb-4">Their Channels</h2>
           <ul className="list-inside rounded-lg p-4">
-            {uniqueTheirChannels.map((channel, index) => (
+            {uniqueChannels2.map((channel, index) => (
               <li
                 key={index}
                 className="flex items-center py-2 border-b last:border-0"
@@ -152,7 +165,12 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
                   alt={channel.title}
                   className="w-10 h-10 rounded-full mr-4"
                 />
-                <span>{channel.title}</span>
+                <a
+                  href={`https://alfafrens.com/channel/${channel.channel?.id}`}
+                  target="_blank"
+                >
+                  {channel.title}
+                </a>{" "}
               </li>
             ))}
           </ul>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface FIDFormProps {
   onSubmit: (myFid: string, theirFid: string) => void;
@@ -10,8 +11,12 @@ const FIDForm: React.FC<FIDFormProps> = ({ onSubmit }) => {
   const [myFid, setMyFid] = useState<string>("");
   const [theirFid, setTheirFid] = useState<string>("");
 
+  const router = useRouter();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const queryParams = new URLSearchParams({ myFid, theirFid }).toString();
+    router.push(`/?${queryParams}`);
     onSubmit(myFid, theirFid);
   };
 
