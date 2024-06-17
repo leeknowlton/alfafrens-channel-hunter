@@ -1,33 +1,27 @@
-// app/api/getUserSubscribedChannels/route.ts
+// app/api/getUserByFid/route.ts
 import { NextResponse } from "next/server";
 
-interface Channel {
-  title: string;
-  profileimgurl: string;
-  // Add other fields as necessary
-}
-
-interface ApiResponse {
-  channels: Channel[];
-  hasMore: boolean;
+interface UserResponse {
+  handle: string;
+  fid: string;
+  userAddress: string;
+  channeladdress: string;
 }
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const fid = searchParams.get("fid");
-  const first = searchParams.get("first");
-  const skip = searchParams.get("skip");
 
-  if (!fid || !first || !skip) {
+  if (!fid) {
     return NextResponse.json(
-      { error: "Missing required query parameters: fid, first, skip" },
+      { error: "Missing required query parameter: fid" },
       { status: 400 }
     );
   }
 
   try {
     const response = await fetch(
-      `https://alfafrens.com/api/v0/getUserSubscribedChannels?fid=${fid}&first=${first}&skip=${skip}`,
+      `https://alfafrens.com/api/v0/getUserByFid?fid=${fid}`,
       {
         method: "GET",
         headers: {
@@ -43,7 +37,7 @@ export async function GET(request: Request) {
       );
     }
 
-    const data: ApiResponse = await response.json();
+    const data: UserResponse = await response.json();
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     return NextResponse.json(

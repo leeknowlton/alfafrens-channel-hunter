@@ -5,13 +5,23 @@ import { useState, useEffect } from "react";
 interface Channel {
   title: string;
   profileimgurl: string;
-  channel: object;
+  channel: {
+    id: string;
+  };
+}
+
+interface User {
+  handle: string;
 }
 
 interface ApiResponse {
   channels: Channel[];
   hasMore: boolean;
   error?: string;
+}
+
+interface UserResponse {
+  handle: string;
 }
 
 interface SubscribedChannelsProps {
@@ -29,6 +39,8 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
 }) => {
   const [channels1, setChannels1] = useState<Channel[]>([]);
   const [channels2, setChannels2] = useState<Channel[]>([]);
+  const [handle1, setHandle1] = useState<string>("");
+  const [handle2, setHandle2] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -57,15 +69,32 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
       return allChannels;
     }
 
+    async function fetchHandle(fid: string) {
+      const response = await fetch(`/api/getUserByFid?fid=${fid}`);
+      const result: UserResponse = await response.json();
+
+      if (!response.ok) {
+        setError(result.handle || "Failed to fetch handle");
+        return "";
+      }
+
+      return result.handle;
+    }
+
     async function fetchData() {
       try {
-        const [channels1Data, channels2Data] = await Promise.all([
-          fetchChannels(fid1),
-          fetchChannels(fid2),
-        ]);
+        const [channels1Data, channels2Data, handle1Data, handle2Data] =
+          await Promise.all([
+            fetchChannels(fid1),
+            fetchChannels(fid2),
+            fetchHandle(fid1),
+            fetchHandle(fid2),
+          ]);
 
         setChannels1(channels1Data);
         setChannels2(channels2Data);
+        setHandle1(handle1Data);
+        setHandle2(handle2Data);
       } catch (err) {
         if (err instanceof Error) {
           setError(err.message);
@@ -96,19 +125,15 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
     (channel) => !channelTitles1.includes(channel.title)
   );
 
-  console.log(uniqueChannels2);
-
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold text-center mb-4">
+      <h1 className="text-3xl font-bold text-center mb-8">
         Channel Comparison
       </h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div>
-          <h2 className="text-xl font-bold text-center mb-4">
-            Common Channels
-          </h2>
-          <ul className="list-inside rounded-lg p-4">
+          <h2 className="font-bold text-center mb-4">Common Channels</h2>
+          <ul className="list-inside rounded-lg p-4 bg-base-200 shadow-md">
             {commonChannels.map((channel, index) => (
               <li
                 key={index}
@@ -122,6 +147,7 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
                 <a
                   href={`https://alfafrens.com/channel/${channel.channel?.id}`}
                   target="_blank"
+                  className="text-blue-500 hover:underline"
                 >
                   {channel.title}
                 </a>
@@ -130,8 +156,10 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
           </ul>
         </div>
         <div>
-          <h2 className="text-xl font-bold text-center mb-4">My Channels</h2>
-          <ul className="list-inside rounded-lg p-4">
+          <h2 className="font-bold text-center mb-4">
+            {handle1 ? handle1 + "'s Unique Channels" : "My Channels"}
+          </h2>
+          <ul className="list-inside rounded-lg p-4 bg-base-200 shadow-md">
             {uniqueChannels1.map((channel, index) => (
               <li
                 key={index}
@@ -145,16 +173,19 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
                 <a
                   href={`https://alfafrens.com/channel/${channel.channel?.id}`}
                   target="_blank"
+                  className="text-blue-500 hover:underline"
                 >
                   {channel.title}
-                </a>{" "}
+                </a>
               </li>
             ))}
           </ul>
         </div>
-        <div>
-          <h2 className="text-xl font-bold text-center mb-4">Their Channels</h2>
-          <ul className="list-inside rounded-lg p-4">
+        <div className="">
+          <h2 className="font-bold text-center mb-4">
+            {handle2 ? handle2 + "'s Unique Channels" : "Their Channels"}
+          </h2>
+          <ul className="list-inside rounded-lg p-4 bg-base-200 shadow-lg">
             {uniqueChannels2.map((channel, index) => (
               <li
                 key={index}
@@ -163,14 +194,15 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
                 <img
                   src={channel.profileimgurl}
                   alt={channel.title}
-                  className="w-10 h-10 rounded-full mr-4"
+                  className="w-12 h-12 rounded-full mr-4"
                 />
                 <a
                   href={`https://alfafrens.com/channel/${channel.channel?.id}`}
                   target="_blank"
+                  className="text-blue-500 hover:underline"
                 >
                   {channel.title}
-                </a>{" "}
+                </a>
               </li>
             ))}
           </ul>

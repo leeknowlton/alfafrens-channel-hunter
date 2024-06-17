@@ -27,12 +27,12 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-base-100">
       <Head>
         <title>AlfaFrens Channel Hunt</title>
         <link rel="icon" href="/favicon.png" type="image/png" />
       </Head>
-      <h1 className="text-3xl font-bold mb-6">
+      <h1 className="text-4xl font-bold mb-8">
         Welcome to AlfaFrens Channel Hunt
       </h1>
       <FIDForm onSubmit={handleFormSubmit} />
