@@ -4,60 +4,60 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 interface FIDFormProps {
-  onSubmit: (myFid: string, theirFid: string) => void;
+  onSubmit: (fid1: string, fid2: string) => void;
 }
 
 const FIDForm: React.FC<FIDFormProps> = ({ onSubmit }) => {
-  const [myFid, setMyFid] = useState<string>("");
-  const [theirFid, setTheirFid] = useState<string>("");
+  const [fid1, setFid1] = useState<string>("");
+  const [fid2, setFid2] = useState<string>("");
 
   const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const queryParams = new URLSearchParams({ myFid, theirFid }).toString();
+    const queryParams = new URLSearchParams({ fid1, fid2 }).toString();
     router.push(`/?${queryParams}`);
-    onSubmit(myFid, theirFid);
+    onSubmit(fid1, fid2);
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex items-center space-x-4">
+    <form
+      onSubmit={handleSubmit}
+      className="flex items-center space-x-4 content-end"
+    >
       <div>
         <label
-          htmlFor="myFid"
+          htmlFor="fid1"
           className="block text-sm font-medium text-gray-700"
         >
           My FID
         </label>
         <input
           type="text"
-          id="myFid"
-          value={myFid}
-          onChange={(e) => setMyFid(e.target.value)}
+          id="fid1"
+          value={fid1}
+          onChange={(e) => setFid1(e.target.value)}
           className="mt-1 p-2 border border-gray-300 rounded-md"
           required
         />
       </div>
       <div>
         <label
-          htmlFor="theirFid"
+          htmlFor="fid2"
           className="block text-sm font-medium text-gray-700"
         >
           Their FID
         </label>
         <input
           type="text"
-          id="theirFid"
-          value={theirFid}
-          onChange={(e) => setTheirFid(e.target.value)}
+          id="fid2"
+          value={fid2}
+          onChange={(e) => setFid2(e.target.value)}
           className="mt-1 p-2 border border-gray-300 rounded-md"
           required
         />
       </div>
-      <button
-        type="submit"
-        className="mt-2 p-2 bg-blue-500 text-white rounded-md"
-      >
+      <button type="submit" className="p-2 bg-blue-500 text-white rounded-md">
         Submit
       </button>
     </form>
