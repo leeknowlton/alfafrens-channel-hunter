@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import debounce from "lodash/debounce";
 import axios from "axios";
 import SuggestionList from "./SuggestionList";
@@ -28,6 +28,7 @@ const UsernameInput: React.FC<UsernameInputProps> = ({
 }) => {
   const [suggestions, setSuggestions] = useState<User[]>([]);
   const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (value.length > 2) {
@@ -40,16 +41,8 @@ const UsernameInput: React.FC<UsernameInputProps> = ({
 
   const fetchSuggestions = async (query: string) => {
     try {
-      const response = await axios.get(
-        `https://api.neynar.com/v2/farcaster/user/search?q=${query}&viewer_fid=3&limit=5`,
-        {
-          headers: {
-            accept: "application/json",
-            api_key: "NEYNAR_FROG_FM",
-          },
-        }
-      );
-      setSuggestions(response.data.result.users || []);
+      const response = await axios.get(`/api/searchUsernames?q=${query}`);
+      setSuggestions(response.data || []);
       setShowDropdown(true);
     } catch (error) {
       console.error("Error fetching search results:", error);
@@ -63,12 +56,16 @@ const UsernameInput: React.FC<UsernameInputProps> = ({
     onValueChange(user.username);
     setShowDropdown(false);
     setSuggestions([]);
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
   };
 
   return (
     <div className="relative w-full">
       <label className="block text-sm font-medium mb-1">{label}</label>
       <input
+        ref={inputRef}
         type="text"
         value={value}
         onChange={(e) => onValueChange(e.target.value)}
