@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import Head from "next/head";
 import FIDForm from "../components/FIDForm";
 import SubscribedChannels from "../components/SubscribedChannels";
-import SearchParamsHandler from "../components/SearchParamsHandler";
 
 const Home: React.FC = () => {
   const [fid1, setFid1] = useState<string | null>(null);
@@ -15,6 +15,17 @@ const Home: React.FC = () => {
     setFid2(fid2);
   };
 
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const fid1 = searchParams.get("fid1");
+    const fid2 = searchParams.get("fid2");
+    if (fid1 && fid2) {
+      setFid1(fid1);
+      setFid2(fid2);
+    }
+  }, [searchParams]);
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-base-100 my-10">
       <Head>
@@ -23,7 +34,6 @@ const Home: React.FC = () => {
       </Head>
       <h1 className="text-4xl font-bold mb-4">AlfaFrens Channel Hunt</h1>
       <FIDForm onSubmit={handleFormSubmit} />
-      <SearchParamsHandler onParamsChange={handleFormSubmit} />
       {fid1 && fid2 && (
         <SubscribedChannels fid1={fid1} fid2={fid2} first={20} skip={0} />
       )}

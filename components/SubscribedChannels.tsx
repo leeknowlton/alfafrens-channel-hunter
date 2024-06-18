@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ChannelList from "./ChannelList";
 
 interface Channel {
   title: string;
@@ -11,7 +12,7 @@ interface Channel {
   totalSubscriptionOutflowRate: number;
 }
 
-interface User {
+interface UserResponse {
   handle: string;
 }
 
@@ -19,10 +20,6 @@ interface ApiResponse {
   channels: Channel[];
   hasMore: boolean;
   error?: string;
-}
-
-interface UserResponse {
-  handle: string;
 }
 
 interface SubscribedChannelsProps {
@@ -126,114 +123,18 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
     (channel) => !channelTitles1.includes(channel.title)
   );
 
-  console.log(uniqueChannels2);
-
   return (
     <div className="container mx-auto p-4 my-5">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div>
-          <h2 className="text-lg font-bold text-center mb-4">
-            {handle1 ? handle1 + "'s Unique Channels" : "My Channels"}
-          </h2>
-          <ul className="list-inside rounded-lg p-4 bg-base-200 shadow-md">
-            {uniqueChannels1.map((channel, index) => (
-              <li
-                key={index}
-                className="flex items-center py-2 hover:bg-gray-800 rounded-md px-2"
-              >
-                <a
-                  href={`https://alfafrens.com/channel/${channel.channel?.id}`}
-                  target="_blank"
-                  className="text-blue-50 flex"
-                >
-                  <img
-                    src={channel.profileimgurl}
-                    alt={channel.title}
-                    className="w-10 h-10 rounded-full mr-4"
-                  />
-                  <div className="flex flex-col">
-                    {channel.title}
-                    <span className="text-xs text-gray-500">
-                      {Math.round(
-                        channel.totalSubscriptionOutflowRate / 380517503805.174
-                      )}
-                      {""}
-                    </span>
-                  </div>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h2 className="text-lg font-bold text-center mb-4">
-            Common Channels
-          </h2>
-          <ul className="list-inside rounded-lg p-4 bg-base-200 shadow-md">
-            {commonChannels.map((channel, index) => (
-              <li
-                key={index}
-                className="flex items-center py-2 hover:bg-gray-800 rounded-md px-2"
-              >
-                <a
-                  href={`https://alfafrens.com/channel/${channel.channel?.id}`}
-                  target="_blank"
-                  className="text-blue-50 flex"
-                >
-                  <img
-                    src={channel.profileimgurl}
-                    alt={channel.title}
-                    className="w-10 h-10 rounded-full mr-4"
-                  />
-                  <div className="flex flex-col">
-                    {channel.title}
-                    <span className="text-xs text-gray-500">
-                      {Math.round(
-                        channel.totalSubscriptionOutflowRate / 380517503805.174
-                      )}
-                      {""}
-                    </span>
-                  </div>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="">
-          <h2 className="text-lg font-bold text-center mb-4">
-            {handle2 ? handle2 + "'s Unique Channels" : "Their Channels"}
-          </h2>
-          <ul className="list-inside rounded-lg p-4 bg-base-200 shadow-lg">
-            {uniqueChannels2.map((channel, index) => (
-              <li
-                key={index}
-                className="flex items-center py-2 hover:bg-gray-800 rounded-md px-2"
-              >
-                <a
-                  href={`https://alfafrens.com/channel/${channel.channel?.id}`}
-                  target="_blank"
-                  className="text-blue-50 flex"
-                >
-                  <img
-                    src={channel.profileimgurl}
-                    alt={channel.title}
-                    className="w-10 h-10 rounded-full mr-4"
-                  />
-                  <div className="flex flex-col">
-                    {channel.title}
-                    <span className="text-xs text-gray-500">
-                      {Math.round(
-                        channel.totalSubscriptionOutflowRate / 380517503805.174
-                      )}
-                      {""}
-                    </span>
-                  </div>
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ChannelList
+          title={handle1 ? `${handle1}'s Unique Channels` : "My Channels"}
+          channels={uniqueChannels1}
+        />
+        <ChannelList title="Common Channels" channels={commonChannels} />
+        <ChannelList
+          title={handle2 ? `${handle2}'s Unique Channels` : "Their Channels"}
+          channels={uniqueChannels2}
+        />
       </div>
     </div>
   );
