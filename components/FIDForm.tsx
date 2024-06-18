@@ -45,7 +45,7 @@ const FIDForm: React.FC<FIDFormProps> = ({ onSubmit }) => {
           onFidChange={setTheirFid}
         />
       </div>
-      <button type="submit" className="p-2 bg-blue-500 text-white rounded-md">
+      <button type="submit" className="btn btn-outline">
         Submit
       </button>
     </form>
