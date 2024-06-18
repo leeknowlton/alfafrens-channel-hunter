@@ -8,16 +8,24 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      colors: {
+        primary: "#0400F5", // Blue
+        secondary: "#8CFB51", // Lime Green
+        pink: "#FF69B4", // Hot Pink
+        darkBg: "#1E1E24", // Raisin Black
+        darkCard: "#1E1E24", // Raisin Black (same for card background)
+        white: "#FFFFFF",
+        grey: "#758096",
+      },
+      fontFamily: {
+        sans: ["SF Pro", "sans-serif"],
+        orbitron: ["Orbitron", "sans-serif"],
       },
     },
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
   daisyui: {
-    themes: ["light", "dark", "cupcake"],
+    themes: ["dark"],
   },
 };
 export default config;

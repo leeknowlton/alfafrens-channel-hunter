@@ -1,44 +1,77 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
-import Head from "next/head";
-import FIDForm from "../components/FIDForm";
-import SubscribedChannels from "../components/SubscribedChannels";
+import Image from "next/image";
+import Link from "next/link";
 
-const Home: React.FC = () => {
-  const [fid1, setFid1] = useState<string | null>(null);
-  const [fid2, setFid2] = useState<string | null>(null);
-
-  const handleFormSubmit = (fid1: string, fid2: string) => {
-    setFid1(fid1);
-    setFid2(fid2);
-  };
-
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    const fid1 = searchParams.get("fid1");
-    const fid2 = searchParams.get("fid2");
-    if (fid1 && fid2) {
-      setFid1(fid1);
-      setFid2(fid2);
-    }
-  }, [searchParams]);
-
+export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-base-100 my-10">
-      <Head>
-        <title>AlfaFrens Channel Hunt</title>
-        <link rel="icon" href="/favicon.png" type="image/png" />
-      </Head>
-      <h1 className="text-4xl font-bold mb-4">AlfaFrens Channel Hunt</h1>
-      <FIDForm onSubmit={handleFormSubmit} />
-      {fid1 && fid2 && (
-        <SubscribedChannels fid1={fid1} fid2={fid2} first={20} skip={0} />
-      )}
+    <div className="min-h-screen flex flex-col items-center justify-center bg-darkBg text-white font-sans">
+      <div className="mx-auto p-4">
+        <h2 className="text-2xl text-center glitch font-orbitron">
+          Alfa<span className="font-bold">Frens</span>
+        </h2>
+        <h1 className="text-4xl font-bold mb-8 text-center glitch font-orbitron text-secondary uppercase">
+          Channel Hunt
+        </h1>
+        <div className="flex gap-8 mx-auto">
+          <Link
+            href="/vennfrens"
+            className="bg-primary p-10 rounded-lg shadow-lg transform hover:scale-105 transition-transform border border-white border-dashed bg-opacity-50 min-w-96"
+          >
+            <h2 className="text-2xl font-bold text-secondary mb-2 text-center">
+              VENN FRENS
+            </h2>
+            <div className="flex justify-center my-4">
+              <Image
+                src="/venn.png"
+                alt="Venn Frens"
+                width={197}
+                height={110}
+                className="mx-auto"
+              />
+            </div>
+            <div className="w-64 mx-auto mt-8">
+              <p className="text-sm">
+                Two users, compare
+                <br />
+                Subs they share and those apart —<br />
+                Differences revealed.
+                <br />- Matsuo Basho
+              </p>
+              <p className="mt-4 text-xs italic">
+                (This actually might be useful!)
+              </p>
+            </div>
+          </Link>
+          <div className="bg-secondary p-10 rounded-lg shadow-lg transform hover:scale-105 transition-transform border border-white border-dashed bg-opacity-80 min-w-96 text-gray-900">
+            <h2 className="text-2xl font-bold text-primary mb-2 text-center">
+              POPULARITY CONTEST
+            </h2>
+            <div className="flex justify-center my-4">
+              <Image
+                src="/popularity.png" // Replace with actual path to your Popularity Contest image
+                alt="Popularity Contest"
+                width={150}
+                height={150}
+                className="mx-auto"
+              />
+            </div>
+            <div className="w-64 mx-auto">
+              <p className="text-sm italic mb-4">
+                Less fair than your high school homecoming.
+              </p>
+              <p className="text-sm">
+                We took subs from the Top 100 (by stake) and ranked by how many
+                times they appeared.
+                <br />
+              </p>
+              <p className="text-xs mt-2 italic">
+                (Updated periodically at best)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
-};
-
-export default Home;
+}

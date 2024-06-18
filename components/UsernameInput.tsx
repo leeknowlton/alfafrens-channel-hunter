@@ -63,13 +63,13 @@ const UsernameInput: React.FC<UsernameInputProps> = ({
 
   return (
     <div className="relative w-full">
-      <label className="block text-sm font-medium mb-1">{label}</label>
+      <label className="label text-xs">{label}</label>
       <input
         ref={inputRef}
         type="text"
         value={value}
         onChange={(e) => onValueChange(e.target.value)}
-        className="p-2 border border-gray-300 rounded-md w-full"
+        className="input input-primary"
         required
       />
       {showDropdown && suggestions.length > 0 && (

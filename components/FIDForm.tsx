@@ -22,30 +22,30 @@ const FIDForm: React.FC<FIDFormProps> = ({ onSubmit }) => {
       fid1: myFid,
       fid2: theirFid,
     }).toString();
-    router.push(`/?${queryParams}`);
+    router.push(`/vennfrens?${queryParams}`);
     onSubmit(myFid, theirFid);
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col space-y-6 w-full max-w-lg mx-auto"
+      className="flex flex-col space-y-6 w-full max-w-lg mx-auto form-control"
     >
       <div className="flex gap-10">
         <UsernameInput
-          label="User 1"
+          label="USER ONE"
           value={myUsername}
           onValueChange={setMyUsername}
           onFidChange={setMyFid}
         />
         <UsernameInput
-          label="User 2"
+          label="USER TWO"
           value={theirUsername}
           onValueChange={setTheirUsername}
           onFidChange={setTheirFid}
         />
       </div>
-      <button type="submit" className="btn btn-outline">
+      <button type="submit" className="btn btn-primary">
         Submit
       </button>
     </form>

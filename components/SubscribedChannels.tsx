@@ -125,14 +125,24 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
 
   return (
     <div className="container mx-auto p-4 my-5">
+      {/* <div className="flex flex-col gap-2 mx-auto items-center mb-4 justify-center">
+        <div className="flex flex-col w-64 px-4 py-2 rounded-md bg-opacity-60 border border-primary">
+          <div className="text-xs uppercase text-gray-400">User 1</div>
+          <div className="text-lg">{handle1}</div>
+        </div>
+        <div className="flex flex-col w-64 px-4 py-2 rounded-md bg-opacity-60 border border-primary">
+          <div className="text-xs uppercase text-gray-400">User 2</div>
+          <div className="text-lg">{handle2}</div>
+        </div>
+      </div> */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <ChannelList
-          title={handle1 ? `${handle1}'s Unique Channels` : "My Channels"}
+          title={handle1 ? `${handle1}'s Unique Subs` : "My Channels"}
           channels={uniqueChannels1}
         />
-        <ChannelList title="Common Channels" channels={commonChannels} />
+        <ChannelList title="Both Subbed To" channels={commonChannels} />
         <ChannelList
-          title={handle2 ? `${handle2}'s Unique Channels` : "Their Channels"}
+          title={handle2 ? `${handle2}'s Unique Subs` : "Their Channels"}
           channels={uniqueChannels2}
         />
       </div>
