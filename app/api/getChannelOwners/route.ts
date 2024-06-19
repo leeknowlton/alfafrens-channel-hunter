@@ -120,6 +120,8 @@ export async function GET() {
 
     return NextResponse.json(sortedOwners);
   } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    const message =
+      error instanceof Error ? error.message : "An unknown error occurred";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
