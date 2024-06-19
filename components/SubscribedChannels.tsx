@@ -1,7 +1,6 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import ChannelList from "./ChannelList";
+import SubscriptionStats from "./SubscriptionStats";
 
 interface Channel {
   title: string;
@@ -10,6 +9,7 @@ interface Channel {
     id: string;
   };
   totalSubscriptionOutflowRate: number;
+  totalSubscriptionOutflowAmount: number;
 }
 
 interface UserResponse {
@@ -58,7 +58,7 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
           setError(result.error || "Failed to fetch data");
           return [];
         }
-
+        console.log(result);
         allChannels = allChannels.concat(result.channels);
         hasMore = result.hasMore;
         currentSkip += first;
@@ -125,26 +125,56 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
 
   return (
     <div className="container mx-auto p-4 my-5">
-      {/* <div className="flex flex-col gap-2 mx-auto items-center mb-4 justify-center">
-        <div className="flex flex-col w-64 px-4 py-2 rounded-md bg-opacity-60 border border-primary">
-          <div className="text-xs uppercase text-gray-400">User 1</div>
-          <div className="text-lg">{handle1}</div>
+      <div className="mx-auto max-w-fit">
+        <div className="flex gap-5 mx-auto items-center text-center mb-4 justify-center">
+          <div className="flex flex-col w-64 bg-base-200  px-4 py-2 rounded-md">
+            <div className="text-xs uppercase text-gray-400">User 1</div>
+            <div className="text-xl">{handle1}</div>
+          </div>
+          <div className="flex flex-col min-w-64 bg-base-200  px-4 py-2 rounded-md">
+            <div className="text-xs uppercase text-gray-400">User 2</div>
+            <div className="text-xl ">{handle2}</div>
+          </div>
         </div>
-        <div className="flex flex-col w-64 px-4 py-2 rounded-md bg-opacity-60 border border-primary">
-          <div className="text-xs uppercase text-gray-400">User 2</div>
-          <div className="text-lg">{handle2}</div>
+        <div className="mx-auto">
+          <SubscriptionStats
+            handle1={handle1}
+            handle2={handle2}
+            channels1={channels1}
+            channels2={channels2}
+          />
         </div>
-      </div> */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <ChannelList
-          title={handle1 ? `${handle1}'s Unique Subs` : "My Channels"}
-          channels={uniqueChannels1}
-        />
-        <ChannelList title="Both Subbed To" channels={commonChannels} />
-        <ChannelList
-          title={handle2 ? `${handle2}'s Unique Subs` : "Their Channels"}
-          channels={uniqueChannels2}
-        />
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-6">
+        <div className="flex-1 border border-primary border-dashed  text-secondary bg-base-200">
+          <h3 className="text-center mb-2 bg-primary py-2">
+            {handle1
+              ? `${handle1}'s Unique Subs (${uniqueChannels1.length})`
+              : `My Unique Subscriptions (${uniqueChannels1.length})`}
+          </h3>
+          <ChannelList
+            title={handle1 ? `${handle1}'s Unique Subs` : "My Channels"}
+            channels={uniqueChannels1}
+          />
+        </div>
+        <div className="flex-1 border border-gray-300 border-dashed  text-gray-200 bg-base-200">
+          <h3 className="text-center mb-2  py-2 bg-gray-800">
+            Common Subscriptions ({commonChannels.length})
+          </h3>
+          <ChannelList title="Both Subbed To" channels={commonChannels} />
+        </div>
+        <div className="flex-1 border border-secondary border-dashed  text-primary">
+          <h3 className="text-center mb-2 bg-secondary py-2">
+            {handle2
+              ? `${handle2}'s Unique Subs (${uniqueChannels2.length})`
+              : `Their Unique Subscriptions (${uniqueChannels2.length})`}
+          </h3>
+          <ChannelList
+            title={handle2 ? `${handle2}'s Unique Subs` : "Their Channels"}
+            channels={uniqueChannels2}
+          />
+        </div>
       </div>
     </div>
   );

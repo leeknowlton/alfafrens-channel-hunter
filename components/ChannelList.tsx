@@ -13,20 +13,17 @@ interface Channel {
 }
 
 interface ChannelListProps {
-  title: string;
   channels: Channel[];
+  title: string;
 }
 
-const ChannelList: React.FC<ChannelListProps> = ({ title, channels }) => {
+const ChannelList: React.FC<ChannelListProps> = ({ channels }) => {
   return (
-    <div>
-      <h2 className="text-center mb-4">{title}</h2>
-      <ul className="list-inside rounded-lg p-4 bg-base-200 shadow-md">
-        {channels.map((channel, index) => (
-          <ChannelItem key={index} channel={channel} />
-        ))}
-      </ul>
-    </div>
+    <ul className="list-inside p-4 bg-base-200 shadow-md">
+      {channels.map((channel, index) => (
+        <ChannelItem key={index} channel={channel} />
+      ))}
+    </ul>
   );
 };
 
