@@ -43,7 +43,10 @@ export default function Home() {
               </p>
             </div>
           </Link>
-          <div className="bg-secondary p-10 rounded-lg shadow-lg transform hover:scale-105 transition-transform border border-white border-dashed bg-opacity-80 min-w-96 text-gray-900">
+          <Link
+            href="/popularitycontest"
+            className="bg-secondary p-10 rounded-lg shadow-lg transform hover:scale-105 transition-transform border border-white border-dashed bg-opacity-80 min-w-96 text-gray-900"
+          >
             <h2 className="text-2xl font-bold text-primary mb-2 text-center">
               POPULARITY CONTEST
             </h2>
@@ -69,7 +72,7 @@ export default function Home() {
                 (Updated periodically at best)
               </p>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     </div>
