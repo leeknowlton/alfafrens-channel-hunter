@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useEffect, useState } from "react";
@@ -63,7 +64,7 @@ const PopularityContest: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto p-4 my-5 max-w-lg relative">
+    <div className="mx-auto p-4 py-5 relative bg-base-100">
       <Image
         src="/popularity.png"
         alt="Venn Frens"
@@ -75,49 +76,49 @@ const PopularityContest: React.FC = () => {
       <h1 className="text-4xl font-bold mt-4 mb-2 text-secondary text-center font-orbitron">
         Popularity Contest
       </h1>
-      <p className="text-sm italic mb-4 text-center">
-        Less fair than your high school homecoming.
-      </p>
-      <p className="text-sm mb-4 bg-primary border border-dashed p-2">
-        <div className="uppercase text-xs text-secondary bg-primary">
-          Super-Duper Official Methodology
-        </div>{" "}
-        We took the subs from the Top 50 (by stake) and ranked them by sub
-        frequency. Updated periodically, at best.
-      </p>
-      <div className="relative z-10">
-        <ul className="list-none relative z-10">
-          {channels.map(({ channel }, index) => (
-            <a
-              key={channel.channel.id}
-              href={`https://alfafrens.com/channel/${channel.channel?.id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <li
-                className={`mb-4 p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-lg ${getHighlightClass(
-                  index
-                )}`}
+      <div className="container max-w-lg mx-auto">
+        <p className="text-sm italic mb-4 text-center">
+          Less fair than your high school homecoming.
+        </p>
+        <p className="text-sm mb-4 bg-primary border border-dashed p-2 bg-opacity-10 border-opacity-50">
+          <p className="uppercase text-xs ">Super Duper Official Methodology</p>{" "}
+          Take subs from the Top 50 (by stake) and rank them by sub frequency.
+          Updated periodically, at best.
+        </p>
+        <div className="relative z-10 ">
+          <ul className="list-none relative z-10">
+            {channels.map(({ channel }, index) => (
+              <a
+                key={channel.channel.id}
+                href={`https://alfafrens.com/channel/${channel.channel?.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
               >
-                <div className="flex items-center">
-                  <span className="text-base mr-4">{index + 1}.</span>
-                  <img
-                    src={channel.profileimgurl}
-                    alt={channel.title}
-                    className="w-10 h-10 rounded-full mr-4"
-                  />
-                  <div>
-                    <p className="text-sm">{channel.title}</p>
-                    <p className="text-xs text-gray-500">
-                      {getPrice(channel.totalSubscriptionOutflowRate)} DEGENx
-                    </p>
+                <li
+                  className={`mb-4 p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-lg ${getHighlightClass(
+                    index
+                  )}`}
+                >
+                  <div className="flex items-center">
+                    <span className="text-base mr-4">{index + 1}.</span>
+                    <img
+                      src={channel.profileimgurl}
+                      alt={channel.title}
+                      className="w-10 h-10 rounded-full mr-4"
+                    />
+                    <div>
+                      <p className="text-sm">{channel.title}</p>
+                      <p className="text-xs text-gray-500">
+                        {getPrice(channel.totalSubscriptionOutflowRate)} DEGENx
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </li>
-            </a>
-          ))}
-        </ul>
+                </li>
+              </a>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

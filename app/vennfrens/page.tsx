@@ -28,7 +28,7 @@ const Home: React.FC = () => {
   }, [searchParams]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-base-100 my-10">
+    <div className="min-h-screen flex flex-col items-center bg-base-100 py-10">
       <Head>
         <title>VennFrens</title>
         <link rel="icon" href="/favicon.png" type="image/png" />
@@ -51,8 +51,9 @@ const Home: React.FC = () => {
         <div className="border border-gray-600 bg-gray-800 border-dashed py-4 px-4 max-w-lg mx-auto">
           <p className="uppercase text-xs text-gray-200">Instructions</p>
           <p className="text-sm mb-4">
-            Choose two users. Discover what they{" "}
-            <span className="text-primary bg-secondary">share</span> and what is{" "}
+            Choose two users. Discover what&apos;s{" "}
+            <span className="text-primary bg-secondary">common</span> and
+            what&apos;s {""}
             <span className="text-secondary bg-primary">unique</span>.
           </p>
           <FIDForm onSubmit={handleFormSubmit} />
