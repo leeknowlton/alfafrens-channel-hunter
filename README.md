@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AlfaFrens Channel Hunter
 
-## Getting Started
+Welcome to AlfaFrens Channel Hunter! This application allows you to compare subscription data between different users and see which channels are most popular among a selected group of users.
 
-First, run the development server:
+## Table of Contents
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- [Features](#features)
+- [Demo](#demo)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [Contact](#contact)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Venn Frens**: Compare the subscription channels between two users, displaying common and unique subscriptions.
+- **Popularity Contest**: Displays the most subscribed channels among a group of top users.
+- **Responsive Design**: Mobile-friendly design ensuring a great user experience on all devices.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Demo
 
-## Learn More
+Check out the live demo: [AlfaFrens Channel Hunter](https://afchannelhunter.zenigame.net)
 
-To learn more about Next.js, take a look at the following resources:
+## Installation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To get a local copy up and running, follow these steps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Clone the repository:**
 
-## Deploy on Vercel
+    ```sh
+    git clone https://github.com/leeknowlton/alfafrens-channel-hunter.git
+    cd alfafrens-channel-hunter
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install dependencies:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+    ```sh
+    npm install
+    ```
+
+3. **Add your environment variables:**
+
+    Create a `.env.local` file in the root of your project and add your environment variables:
+
+    ```sh
+    NEYNAR_API_KEY=your-neynar-api-key
+    ```
+
+4. **Run the development server:**
+
+    ```sh
+    npm run dev
+    ```
+
+    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Usage
+
+### Venn Frens
+
+1. Navigate to the Venn Frens page.
+2. Enter the usernames of two users.
+3. Click "Submit" to compare their subscription channels and see common and unique subscriptions.
+
+### Popularity Contest
+
+1. Navigate to the Popularity Contest page.
+2. View the most subscribed channels among the top users.
+
+## Technologies Used
+
+- **Next.js**: React framework for server-side rendering and generating static websites.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **DaisyUI**: Tailwind CSS components library.
+- **TypeScript**: Typed superset of JavaScript that compiles to plain JavaScript.
+- **AlfaFrens API**: API for fetching user subscription data.
+
+## Contributing
+
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## Contact
+
+Lee Knowlton / Zenigame - [@leeknowlton.eth](https://warpcast.com/leeknowlton.eth)
+
+Project Link: [https://github.com/leeknowlton/alfafrens-channel-hunter](https://github.com/leeknowlton/alfafrens-channel-hunter)
