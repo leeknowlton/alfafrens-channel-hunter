@@ -31,7 +31,7 @@ const Home: React.FC = () => {
     <div className="min-h-screen flex flex-col items-center bg-darkBg py-10 px-4">
       <Head>
         <title>VennFrens</title>
-        <link rel="icon" href="/favicon.png" type="image/png" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="w-full">
         <div className="flex justify-center mb-4">
