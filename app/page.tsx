@@ -36,7 +36,7 @@ export default function Home() {
                 <br />
                 Subs they share and those apart —<br />
                 Differences revealed.
-                <br />- Matsuo Basho
+                <br />- Matsuo Bashō
               </p>
               <p className="mt-4 text-xs italic">
                 (This actually might be useful!)
