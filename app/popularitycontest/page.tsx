@@ -68,7 +68,7 @@ const PopularityContest: React.FC = () => {
       <Image
         src="/popularity.png"
         alt="Venn Frens"
-        width={197}
+        width={150}
         height={110}
         className="mx-auto"
       />
@@ -81,7 +81,9 @@ const PopularityContest: React.FC = () => {
           Less fair than your high school homecoming.
         </p>
         <p className="text-sm mb-4 bg-primary border border-dashed p-2 bg-opacity-10 border-opacity-50">
-          <p className="uppercase text-xs ">Super Duper Official Methodology</p>{" "}
+          <span className="uppercase text-xs ">
+            Super Duper Official Methodology
+          </span>{" "}
           Take subs from the Top 50 (by stake) and rank them by sub frequency.
           Updated periodically, at best.
         </p>
