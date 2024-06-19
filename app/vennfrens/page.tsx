@@ -28,7 +28,7 @@ const Home: React.FC = () => {
   }, [searchParams]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-base-100 py-10">
+    <div className="min-h-screen flex flex-col items-center bg-darkBg py-10">
       <Head>
         <title>VennFrens</title>
         <link rel="icon" href="/favicon.png" type="image/png" />
@@ -41,7 +41,7 @@ const Home: React.FC = () => {
           height={110}
           className="mx-auto"
         />
-        <h1 className="text-4xl font-bold mb-4 text-secondary text-center font-orbitron">
+        <h1 className="text-4xl font-bold mb-4 text-secondary text-center font-mono">
           Venn Frens
         </h1>
         {fid1 && fid2 && (

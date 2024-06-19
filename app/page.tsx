@@ -7,10 +7,10 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-base-100 text-white font-sans">
       <div className="mx-auto p-4">
-        <h2 className="text-2xl text-center glitch font-orbitron">
+        <h2 className="text-2xl text-center glitch font-mono">
           Alfa<span className="font-bold">Frens</span>
         </h2>
-        <h1 className="text-4xl font-bold mb-8 text-center glitch font-orbitron text-secondary uppercase">
+        <h1 className="text-4xl font-bold mb-8 text-center glitch font-mono text-secondary uppercase">
           Channel Hunter
         </h1>
         <div className="flex gap-8 mx-auto">

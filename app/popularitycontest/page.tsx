@@ -73,7 +73,7 @@ const PopularityContest: React.FC = () => {
         className="mx-auto"
       />
 
-      <h1 className="text-4xl font-bold mt-4 mb-2 text-secondary text-center font-orbitron">
+      <h1 className="text-4xl font-bold mt-4 mb-2 text-secondary text-center font-mono">
         Popularity Contest
       </h1>
       <div className="container max-w-lg mx-auto">

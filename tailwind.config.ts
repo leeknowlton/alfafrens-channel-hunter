@@ -18,8 +18,8 @@ const config: Config = {
         grey: "#758096",
       },
       fontFamily: {
-        sans: ["SF Pro", "sans-serif"],
-        orbitron: ["Orbitron", "sans-serif"],
+        sans: ["var(--font-geist-sans)"],
+        mono: ["var(--font-geist-mono)"],
       },
     },
   },
