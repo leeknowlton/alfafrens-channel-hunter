@@ -76,8 +76,8 @@ const SubscriptionStats: React.FC<SubscriptionStatsProps> = ({
   };
 
   return (
-    <div className="bg-base-200 p-4 rounded-lg shadow-md mb-6">
-      <h2 className="uppercase text-xs mb-4">Subscription Breakdown</h2>
+    <div className="p-4 rounded-lg shadow-md mb-6 hidden md:block  border border-gray-700 text-white bg-gray-700 bg-opacity-10">
+      <h2 className="uppercase text-center mb-4">Subscription Breakdown</h2>
       <table className="table-auto w-full text-left">
         <thead>
           <tr>

@@ -12,7 +12,7 @@ const NavBar: React.FC = () => {
             <span className="font-mono text-secondary">CHANNEL HUNTER</span>
           </div>
         </Link>
-        <div className="flex space-x-6">
+        <div className="space-x-6 hidden md:flex">
           <Link href="/vennfrens">
             <span className="hover:text-gray-200">Venn Frens</span>
           </Link>

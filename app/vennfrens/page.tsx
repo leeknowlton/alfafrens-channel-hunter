@@ -28,33 +28,33 @@ const Home: React.FC = () => {
   }, [searchParams]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-darkBg py-10">
+    <div className="min-h-screen flex flex-col items-center bg-darkBg py-10 px-4">
       <Head>
         <title>VennFrens</title>
         <link rel="icon" href="/favicon.png" type="image/png" />
       </Head>
-      <div className="">
-        <Image
-          src="/venn.png"
-          alt="Venn Frens"
-          width={197}
-          height={110}
-          className="mx-auto"
-        />
-        <h1 className="text-4xl font-bold mb-4 text-secondary text-center font-mono">
+      <div className="w-full">
+        <div className="flex justify-center mb-4">
+          <Image
+            src="/venn.png"
+            alt="Venn Frens"
+            width={197}
+            height={110}
+            className="mx-auto"
+          />
+        </div>
+        <h1 className="text-3xl font-bold mb-6 text-secondary text-center font-mono">
           Venn Frens
         </h1>
         {fid1 && fid2 && (
           <SubscribedChannels fid1={fid1} fid2={fid2} first={20} skip={0} />
         )}
-
-        <div className="border border-gray-600 bg-gray-800 border-dashed py-4 px-4 max-w-lg mx-auto">
-          <p className="uppercase text-xs text-gray-200">Instructions</p>
+        <div className="border border-gray-700 text-white bg-gray-700 bg-opacity-10 py-4 px-4 rounded-lg max-w-xl mx-auto">
+          <p className="uppercase text-xs text-gray-200 mb-2">Instructions</p>
           <p className="text-sm mb-4">
-            Choose two users. Discover what&apos;s{" "}
-            <span className="text-primary bg-secondary">common</span> and
-            what&apos;s {""}
-            <span className="text-secondary bg-primary">unique</span>.
+            Choose two users. Discover subs you have in{" "}
+            <span className="text-primary bg-secondary">common</span> and those
+            that are <span className="text-secondary bg-primary">unique</span>.
           </p>
           <FIDForm onSubmit={handleFormSubmit} />
         </div>

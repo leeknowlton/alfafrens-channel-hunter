@@ -127,16 +127,16 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
     <div className="container mx-auto p-4 my-5">
       <div className="mx-auto max-w-fit">
         <div className="flex gap-5 mx-auto items-center text-center mb-4 justify-center">
-          <div className="flex flex-col w-64 bg-base-200  px-4 py-2 rounded-md">
+          <div className="flex flex-col w-64 border border-gray-700 text-white bg-gray-700 bg-opacity-10 px-4 py-2 rounded-md ">
             <div className="text-xs uppercase text-gray-400">User 1</div>
-            <div className="text-xl">{handle1}</div>
+            <div className="text-lg">{handle1}</div>
           </div>
-          <div className="flex flex-col min-w-64 bg-base-200  px-4 py-2 rounded-md">
+          <div className="flex flex-col w-64 border border-gray-700 text-white bg-gray-700 bg-opacity-10 px-4 py-2 rounded-md ">
             <div className="text-xs uppercase text-gray-400">User 2</div>
-            <div className="text-xl ">{handle2}</div>
+            <div className="text-lg ">{handle2}</div>
           </div>
         </div>
-        <div className="mx-auto">
+        <div className="mx-auto w-full">
           <SubscriptionStats
             handle1={handle1}
             handle2={handle2}
@@ -147,35 +147,34 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
       </div>
 
       <div className="flex flex-col md:flex-row gap-6">
-        <div className="flex-1 border border-primary border-dashed  bg-base-200 border-opacity-20">
-          <h3 className="text-center mb-2  py-2 bg-primary bg-opacity-10 px-2 flex flex-col">
+        <div className="flex-1 border border-gray-300 bg-gray-700 bg-opacity-20 border-opacity-20">
+          <h3 className="text-center mb-2 py-2 bg-primary bg-opacity-10 px-2 flex flex-col">
             <span>{handle1}</span>
             <span className="text-xs">
-              {uniqueChannels1.length} Subscriptions
+              {uniqueChannels1.length} Unique Subscriptions
             </span>
-          </h3>{" "}
+          </h3>
           <ChannelList
             title={handle1 ? `${handle1}'s Unique Subs` : "My Channels"}
             channels={uniqueChannels1}
           />
         </div>
-        <div className="flex-1 border border-gray-300 border-dashed  text-gray-200 bg-base-200 border-opacity-20">
-          <h3 className="text-center mb-2  py-2 bg-gray-800 px-2 flex flex-col">
+        <div className="flex-1 border border-gray-300 text-gray-200 bg-gray-700 bg-opacity-20 border-opacity-20">
+          <h3 className="text-center mb-2 py-2 bg-gray-800 px-2 flex flex-col">
             <span>Shared</span>
             <span className="text-xs">
-              {commonChannels.length} Subscriptions
+              {commonChannels.length} Shared Subscriptions
             </span>
           </h3>
           <ChannelList title="Both Subbed To" channels={commonChannels} />
         </div>
-        <div className="flex-1 border border-secondary border-dashed bg-base-200 border-opacity-20">
-          <h3 className="text-center mb-2  py-2 bg-secondary bg-opacity-10 px-2 flex flex-col">
+        <div className="flex-1 border border-gray-300 bg-gray-700 bg-opacity-20 border-opacity-20">
+          <h3 className="text-center mb-2 py-2 bg-secondary bg-opacity-10 px-2 flex flex-col">
             <span>{handle2}</span>
             <span className="text-xs">
-              {uniqueChannels2.length} Subscriptions
+              {uniqueChannels2.length} Unique Subscriptions
             </span>
           </h3>
-
           <ChannelList
             title={handle2 ? `${handle2} Only` : "Their Channels"}
             channels={uniqueChannels2}

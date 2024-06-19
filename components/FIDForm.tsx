@@ -31,7 +31,7 @@ const FIDForm: React.FC<FIDFormProps> = ({ onSubmit }) => {
       onSubmit={handleSubmit}
       className="flex flex-col space-y-6 w-full max-w-lg mx-auto form-control"
     >
-      <div className="flex gap-10">
+      <div className="flex flex-col gap-4 md:flex-row md:gap-10">
         <UsernameInput
           label="USER ONE"
           value={myUsername}
@@ -45,7 +45,10 @@ const FIDForm: React.FC<FIDFormProps> = ({ onSubmit }) => {
           onFidChange={setTheirFid}
         />
       </div>
-      <button type="submit" className="btn btn-primary">
+      <button
+        type="submit"
+        className="btn btn-primary bg-primary text-white hover:bg-primary hover:bg-opacity-80 border-primary hover:border-primary hover:border-opacity-80 hover:text-secondary"
+      >
         Submit
       </button>
     </form>

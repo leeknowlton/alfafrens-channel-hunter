@@ -5,23 +5,23 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-base-100 text-white font-sans">
-      <div className="mx-auto p-4">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-darkBg text-white font-sans">
+      <div className="p-4">
         <h2 className="text-2xl text-center glitch font-mono">
           Alfa<span className="font-bold">Frens</span>
         </h2>
         <h1 className="text-4xl font-bold mb-8 text-center glitch font-mono text-secondary uppercase">
           Channel Hunter
         </h1>
-        <div className="flex gap-8 mx-auto">
+        <div className="flex flex-col lg:flex-row gap-8 mx-auto">
           <Link
             href="/vennfrens"
-            className="bg-primary p-10 rounded-lg shadow-lg transform hover:scale-105 transition-transform border border-white border-dashed bg-opacity-50 min-w-96"
+            className="bg-primary p-6 lg:p-10 rounded-lg shadow-lg transform hover:scale-105 transition-transform border border-white border-dashed bg-opacity-50 w-full lg:min-w-96"
           >
-            <h2 className="text-2xl font-bold text-secondary mb-2 text-center">
+            <h2 className="text-2xl font-bold text-secondary text-center">
               VENN FRENS
             </h2>
-            <div className="flex justify-center my-4">
+            <div className="flex justify-center mb-2 mt-4">
               <Image
                 src="/venn.png"
                 alt="Venn Frens"
@@ -30,7 +30,7 @@ export default function Home() {
                 className="mx-auto"
               />
             </div>
-            <div className="w-64 mx-auto mt-8">
+            <div className="w-full lg:w-64 mx-auto mt-4 text-center">
               <p className="text-sm">
                 Two users, compare
                 <br />
@@ -45,21 +45,21 @@ export default function Home() {
           </Link>
           <Link
             href="/popularitycontest"
-            className="bg-secondary p-10 rounded-lg shadow-lg transform hover:scale-105 transition-transform border border-white border-dashed bg-opacity-80 min-w-96 text-gray-900"
+            className="bg-secondary p-6 lg:p-10 rounded-lg shadow-lg transform hover:scale-105 transition-transform border border-white border-dashed bg-opacity-80 w-full lg:min-w-96 text-gray-900"
           >
-            <h2 className="text-2xl font-bold text-primary mb-2 text-center">
+            <h2 className="text-2xl font-bold text-primary text-center">
               POPULARITY CONTEST
             </h2>
-            <div className="flex justify-center my-4">
+            <div className="flex justify-center mt-2 mb-4">
               <Image
                 src="/popularity.png" // Replace with actual path to your Popularity Contest image
                 alt="Popularity Contest"
-                width={150}
-                height={150}
+                width={120}
+                height={120}
                 className="mx-auto"
               />
             </div>
-            <div className="w-64 mx-auto">
+            <div className="w-full lg:w-64 mx-auto text-center">
               <p className="text-sm italic mb-4">
                 Less fair than your high school homecoming.
               </p>
