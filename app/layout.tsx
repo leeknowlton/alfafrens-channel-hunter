@@ -26,7 +26,7 @@ export default function RootLayout({
       data-theme="dark"
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
-      <body>
+      <body className="bg-darkBg">
         {!isHomePage && <NavBar />}
         <Suspense fallback={<p>Loading...</p>}>{children}</Suspense>
       </body>

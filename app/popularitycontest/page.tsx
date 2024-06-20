@@ -32,7 +32,18 @@ const PopularityContest: React.FC = () => {
         if (!response.ok) {
           setError(data.error);
         } else {
-          setChannels(data.slice(0, 100)); // Truncate to top 100
+          // Sort channels by count and randomly sort channels with the same count
+          const sortedChannels = data.sort(
+            (a: PopularChannel, b: PopularChannel) => {
+              if (b.count === a.count) {
+                return Math.random() - 0.5;
+              }
+              return b.count - a.count;
+            }
+          );
+
+          // Truncate to top 100
+          setChannels(sortedChannels.slice(0, 100));
         }
       } catch (error) {
         setError("Failed to fetch data");
@@ -44,8 +55,10 @@ const PopularityContest: React.FC = () => {
     fetchData();
   }, []);
 
-  if (loading) return <p className="text-center text-blue-500">Loading...</p>;
-  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
+  if (loading)
+    return <p className="text-center text-blue-500 bg-darkBg">Loading...</p>;
+  if (error)
+    return <p className="text-center text-red-500 bg-darkBg">Error: {error}</p>;
 
   const getHighlightClass = (index: number) => {
     if (index === 0)
@@ -64,10 +77,10 @@ const PopularityContest: React.FC = () => {
   };
 
   return (
-    <div className="mx-auto p-4 py-5 relative bg-base-100">
+    <div className="mx-auto p-4 py-5 relative bg-darkBg">
       <Image
         src="/popularity.png"
-        alt="Venn Frens"
+        alt="Popularity Contest"
         width={150}
         height={110}
         className="mx-auto"
@@ -80,13 +93,15 @@ const PopularityContest: React.FC = () => {
         <p className="text-sm italic mb-4 text-center">
           Less fair than your high school homecoming.
         </p>
-        <p className="text-sm mb-4 bg-primary border border-dashed p-2 bg-opacity-10 border-opacity-50">
-          <span className="uppercase text-xs ">
+        <div className="text-sm mb-4 bg-primary border border-dashed p-2 bg-opacity-10 border-opacity-50">
+          <div className="uppercase text-xs ">
             Super Duper Official Methodology
-          </span>{" "}
-          Take subs from the Top 50 (by stake) and rank them by sub frequency.
-          Updated periodically, at best.
-        </p>
+          </div>
+          <p>
+            Take subs from the Top 50 (by stake) and rank them by sub frequency.
+            Randomly order ties. Updated periodically, at best.
+          </p>
+        </div>
         <div className="relative z-10 ">
           <ul className="list-none relative z-10">
             {channels.map(({ channel }, index) => (
