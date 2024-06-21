@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@privy-io/react-auth": "^1.71.0",
     "axios": "^1.7.2",
     "axios-retry": "^4.4.0",
     "chart.js": "^4.4.3",
