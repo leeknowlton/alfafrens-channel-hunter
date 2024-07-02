@@ -20,6 +20,10 @@ const NavBar: React.FC = () => {
           <Link href="/popularitycontest">
             <span className="hover:text-gray-200">Popularity Contest</span>
           </Link>
+          <span className="border-r border-secondary"></span>
+          <Link href="/zenislist">
+            <span className="hover:text-gray-200">Zeni&apos;s List</span>
+          </Link>
         </div>
       </div>
     </nav>
