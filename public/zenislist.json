@@ -100,7 +100,7 @@
       "title": "eirrann",
       "profileimgurl": "https://i.imgur.com/zuEy4FB.jpg",
       "description": "Generative art master and AlfaFrens content creator. And genuinely great person. One of my favorite channels.",
-      "f2f": false,
+      "f2f": true,
       "dateAdded": "2024-07-02"
     }
   },
@@ -180,7 +180,7 @@
       "title": "alexesc",
       "profileimgurl": "https://i.imgur.com/Ph6d9IU.jpg",
       "description": "Learning how to dev by creating for the AlfaFrens ecosystem. Follow along their journey.",
-      "f2f": true,
+      "f2f": false,
       "dateAdded": "2024-07-02"
     }
   },
