@@ -5,6 +5,7 @@ import NavBar from "../components/NavBar";
 import "./globals.css";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { ApolloWrapper } from "./ApolloWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,9 +18,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isHomePage =
-    typeof window !== "undefined" && window.location.pathname === "/";
-
   return (
     <html
       lang="en"
@@ -27,8 +25,10 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body className="bg-darkBg">
-        {!isHomePage && <NavBar />}
-        <Suspense fallback={<p>Loading...</p>}>{children}</Suspense>
+        <ApolloWrapper>
+          <NavBar />
+          <Suspense fallback={<p>Loading...</p>}>{children}</Suspense>
+        </ApolloWrapper>
       </body>
     </html>
   );
