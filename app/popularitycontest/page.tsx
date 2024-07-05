@@ -22,6 +22,7 @@ const PopularityContest: React.FC = () => {
   const [channels, setChannels] = useState<PopularChannel[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -32,18 +33,7 @@ const PopularityContest: React.FC = () => {
         if (!response.ok) {
           setError(data.error);
         } else {
-          // Sort channels by count and randomly sort channels with the same count
-          const sortedChannels = data.sort(
-            (a: PopularChannel, b: PopularChannel) => {
-              if (b.count === a.count) {
-                return Math.random() - 0.5;
-              }
-              return b.count - a.count;
-            }
-          );
-
-          // Truncate to top 100
-          setChannels(sortedChannels.slice(0, 100));
+          setChannels(data);
         }
       } catch (error) {
         setError("Failed to fetch data");
@@ -55,10 +45,8 @@ const PopularityContest: React.FC = () => {
     fetchData();
   }, []);
 
-  if (loading)
-    return <p className="text-center text-blue-500 bg-darkBg">Loading...</p>;
-  if (error)
-    return <p className="text-center text-red-500 bg-darkBg">Error: {error}</p>;
+  if (loading) return <p className="text-center text-blue-500">Loading...</p>;
+  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   const getHighlightClass = (index: number) => {
     if (index === 0)
@@ -75,6 +63,71 @@ const PopularityContest: React.FC = () => {
   const getPrice = (rate: number) => {
     return Math.round(rate / 380517503805.174);
   };
+
+  const renderChannels = () => (
+    <ul className="list-none relative z-10">
+      {channels.slice(0, 10).map(({ channel }, index) => (
+        <a
+          key={channel.channel.id}
+          href={`https://alfafrens.com/channel/${channel.channel?.id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block"
+        >
+          <li
+            className={`mb-4 p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-lg ${getHighlightClass(
+              index
+            )}`}
+          >
+            <div className="flex items-center">
+              <span className="text-base mr-4">{index + 1}.</span>
+              <img
+                src={channel.profileimgurl}
+                alt={channel.title}
+                className="w-10 h-10 rounded-full mr-4"
+              />
+              <div>
+                <p className="text-sm">{channel.title}</p>
+                <p className="text-xs text-gray-500">
+                  {getPrice(channel.totalSubscriptionOutflowRate)} DEGENx
+                </p>
+              </div>
+            </div>
+          </li>
+        </a>
+      ))}
+      {channels.slice(10, 100).map(({ channel }, index) => (
+        <a
+          key={channel.channel.id}
+          href={`https://alfafrens.com/channel/${channel.channel?.id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block"
+        >
+          <li
+            className={`mb-4 p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-lg ${getHighlightClass(
+              index + 10
+            )}`}
+          >
+            <div className="flex items-center">
+              <span className="text-base mr-4">{index + 11}.</span>
+              <img
+                src={channel.profileimgurl}
+                alt={channel.title}
+                className="w-10 h-10 rounded-full mr-4"
+              />
+              <div>
+                <p className="text-sm">{channel.title}</p>
+                <p className="text-xs text-gray-500">
+                  {getPrice(channel.totalSubscriptionOutflowRate)} DEGENx
+                </p>
+              </div>
+            </div>
+          </li>
+        </a>
+      ))}
+    </ul>
+  );
 
   return (
     <div className="mx-auto p-4 py-5 relative bg-darkBg">
@@ -93,49 +146,14 @@ const PopularityContest: React.FC = () => {
         <p className="text-sm italic mb-4 text-center">
           Less fair than your high school homecoming.
         </p>
-        <div className="text-sm mb-4 bg-primary border border-dashed p-2 bg-opacity-10 border-opacity-50">
-          <div className="uppercase text-xs ">
+        <p className="text-sm mb-4 bg-primary border border-dashed p-2 bg-opacity-10 border-opacity-50">
+          <span className="uppercase text-xs ">
             Super Duper Official Methodology
-          </div>
-          <p>
-            Take subs from the Top 50 (by stake) and rank them by sub frequency.
-            Randomly order ties. Updated periodically, at best.
-          </p>
-        </div>
-        <div className="relative z-10 ">
-          <ul className="list-none relative z-10">
-            {channels.map(({ channel }, index) => (
-              <a
-                key={channel.channel.id}
-                href={`https://alfafrens.com/channel/${channel.channel?.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block"
-              >
-                <li
-                  className={`mb-4 p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-lg ${getHighlightClass(
-                    index
-                  )}`}
-                >
-                  <div className="flex items-center">
-                    <span className="text-base mr-4">{index + 1}.</span>
-                    <img
-                      src={channel.profileimgurl}
-                      alt={channel.title}
-                      className="w-10 h-10 rounded-full mr-4"
-                    />
-                    <div>
-                      <p className="text-sm">{channel.title}</p>
-                      <p className="text-xs text-gray-500">
-                        {getPrice(channel.totalSubscriptionOutflowRate)} DEGENx
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              </a>
-            ))}
-          </ul>
-        </div>
+          </span>{" "}
+          Take subs from the Top 50 (by stake) and rank them by sub frequency.
+          Updated periodically, at best.
+        </p>
+        <div className="relative z-10 ">{renderChannels()}</div>
       </div>
     </div>
   );

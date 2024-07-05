@@ -58,7 +58,6 @@ const SubscribedChannels: React.FC<SubscribedChannelsProps> = ({
           setError(result.error || "Failed to fetch data");
           return [];
         }
-        console.log(result);
         allChannels = allChannels.concat(result.channels);
         hasMore = result.hasMore;
         currentSkip += first;

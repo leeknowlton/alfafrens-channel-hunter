@@ -1,25 +1,23 @@
-import type { Metadata } from "next";
-import { Suspense } from "react";
 import { Inter } from "next/font/google";
-import NavBar from "../components/NavBar";
+import { Suspense } from "react";
 import "./globals.css";
+import NavBar from "../components/NavBar"; // Adjust the path as necessary
+import PrivyProviderWrapper from "../components/PrivyProviderWrapper"; // Import the new wrapper
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { ApolloWrapper } from "./ApolloWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "AlfaFrens Channel Hunter",
+export const metadata = {
+  title: "AlfaFrens Channel Hunt",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
-  const isHomePage =
-    typeof window !== "undefined" && window.location.pathname === "/";
-
+}) {
   return (
     <html
       lang="en"
@@ -27,8 +25,12 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
       <body className="bg-darkBg">
-        {!isHomePage && <NavBar />}
-        <Suspense fallback={<p>Loading...</p>}>{children}</Suspense>
+        <PrivyProviderWrapper>
+          <ApolloWrapper>
+            <NavBar />
+            <Suspense fallback={<p>Loading...</p>}>{children}</Suspense>
+          </ApolloWrapper>
+        </PrivyProviderWrapper>
       </body>
     </html>
   );
