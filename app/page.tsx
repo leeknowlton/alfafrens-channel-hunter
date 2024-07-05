@@ -73,6 +73,31 @@ export default function Home() {
               </p>
             </div>
           </Link>
+          <Link
+            href="/zenislist"
+            className="bg-gray-700 bg-opacity-10 p-6 lg:p-10 rounded-lg shadow-lg transform hover:scale-105 transition-transform border border-white border-dashed w-full lg:min-w-96 text-gray-900"
+          >
+            <h2 className="text-2xl font-bold text-gray-100 text-center">
+              ZENI&apos;S LIST
+            </h2>
+            <div className="flex justify-center mt-2 mb-4">
+              <Image
+                src="/popularity.png" // Replace with actual path to your Popularity Contest image
+                alt="Popularity Contest"
+                width={120}
+                height={120}
+                className="mx-auto"
+              />
+            </div>
+            <div className="w-full lg:w-64 mx-auto text-center text-gray-100">
+              <p className="text-sm italic mb-4">A manual labor of love.</p>
+              <p className="text-sm">
+                Uh, well, this is simple. Active channels with a short content
+                description and some tags.
+                <br />
+              </p>
+            </div>
+          </Link>
         </div>
       </div>
     </div>

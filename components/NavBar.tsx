@@ -26,17 +26,25 @@ const NavBar: React.FC = () => {
             <span className="hover:text-gray-200">Popularity Contest</span>
           </Link>
           <span className="border-r border-secondary h-6"></span>
+          <Link href="/zenislist">
+            <span className="hover:text-gray-200">Zeni&apos;s List</span>
+          </Link>
+          <span className="border-r border-secondary h-6"></span>
+          <Link href="/bigstakes">
+            <span className="hover:text-gray-200">Big Stakes</span>
+          </Link>
+          <span className="border-r border-secondary h-6"></span>
           {!user ? (
             <button
-              onClick={() => login("farcaster")}
-              className="bg-primary py-1 px-4 rounded"
+              onClick={() => login()}
+              className="bg-primary bg-opacity-10 border border-primary py-1 px-4 rounded"
             >
-              Login with Farcaster
+              Login
             </button>
           ) : (
             <button
               onClick={() => logout()}
-              className="bg-secondary py-1 px-4 rounded"
+              className="border border-secondary py-1 px-4 rounded"
             >
               Logout
             </button>

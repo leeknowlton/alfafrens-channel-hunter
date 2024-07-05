@@ -2,9 +2,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePrivy } from "@privy-io/react-auth";
 import Image from "next/image";
-import SubscribePrompt from "../../components/SubscribePrompt";
 
 interface Channel {
   title: string;
@@ -21,60 +19,10 @@ interface PopularChannel {
 }
 
 const PopularityContest: React.FC = () => {
-  const { user } = usePrivy();
   const [channels, setChannels] = useState<PopularChannel[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [isSubscribed, setIsSubscribed] = useState<boolean | null>(null);
-  const [alfafrensAddress, setAlfafrensAddress] = useState<string | null>(null);
-
-  const channelAddress = "0x9d9141d98ea1b553a8d761c23c221603bd58a58b"; // Replace with your actual channel address
-
-  useEffect(() => {
-    async function fetchAlfaFrensAddress() {
-      if (!user) return;
-
-      try {
-        const response = await fetch(
-          `/api/getUserByFid?fid=${user.farcaster?.fid}`
-        );
-        const data = await response.json();
-
-        if (!response.ok) {
-          setError(data.error);
-        } else {
-          setAlfafrensAddress(data.userAddress);
-        }
-      } catch (error) {
-        setError("Failed to fetch AlfaFrens address");
-      }
-    }
-
-    fetchAlfaFrensAddress();
-  }, [user]);
-
-  useEffect(() => {
-    async function checkSubscription() {
-      if (!alfafrensAddress) return;
-
-      try {
-        const response = await fetch(
-          `/api/checkSubscription?channelAddress=${channelAddress}&userAddress=${alfafrensAddress}`
-        );
-
-        if (!response.ok) {
-          setIsSubscribed(false);
-        } else {
-          const result = await response.json();
-          setIsSubscribed(false);
-        }
-      } catch (error) {
-        setIsSubscribed(false);
-      }
-    }
-
-    checkSubscription();
-  }, [alfafrensAddress]);
+  const [isSubscribed, setIsSubscribed] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -85,7 +33,7 @@ const PopularityContest: React.FC = () => {
         if (!response.ok) {
           setError(data.error);
         } else {
-          setChannels(data); // Remove truncation here, handle it in rendering
+          setChannels(data);
         }
       } catch (error) {
         setError("Failed to fetch data");
@@ -116,81 +64,70 @@ const PopularityContest: React.FC = () => {
     return Math.round(rate / 380517503805.174);
   };
 
-  const renderChannels = () => {
-    if (isSubscribed === null) {
-      return (
-        <p className="text-center text-blue-500">
-          Checking subscription status...
-        </p>
-      );
-    }
-
-    return (
-      <ul className="list-none relative z-10">
-        {channels.slice(0, 10).map(({ channel }, index) => (
-          <a
-            key={channel.channel.id}
-            href={`https://alfafrens.com/channel/${channel.channel?.id}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block"
+  const renderChannels = () => (
+    <ul className="list-none relative z-10">
+      {channels.slice(0, 10).map(({ channel }, index) => (
+        <a
+          key={channel.channel.id}
+          href={`https://alfafrens.com/channel/${channel.channel?.id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block"
+        >
+          <li
+            className={`mb-4 p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-lg ${getHighlightClass(
+              index
+            )}`}
           >
-            <li
-              className={`mb-4 p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-lg ${getHighlightClass(
-                index
-              )}`}
-            >
-              <div className="flex items-center">
-                <span className="text-base mr-4">{index + 1}.</span>
-                <img
-                  src={channel.profileimgurl}
-                  alt={channel.title}
-                  className="w-10 h-10 rounded-full mr-4"
-                />
-                <div>
-                  <p className="text-sm">{channel.title}</p>
-                  <p className="text-xs text-gray-500">
-                    {getPrice(channel.totalSubscriptionOutflowRate)} DEGENx
-                  </p>
-                </div>
+            <div className="flex items-center">
+              <span className="text-base mr-4">{index + 1}.</span>
+              <img
+                src={channel.profileimgurl}
+                alt={channel.title}
+                className="w-10 h-10 rounded-full mr-4"
+              />
+              <div>
+                <p className="text-sm">{channel.title}</p>
+                <p className="text-xs text-gray-500">
+                  {getPrice(channel.totalSubscriptionOutflowRate)} DEGENx
+                </p>
               </div>
-            </li>
-          </a>
-        ))}
-        {isSubscribed &&
-          channels.slice(10, 100).map(({ channel }, index) => (
-            <a
-              key={channel.channel.id}
-              href={`https://alfafrens.com/channel/${channel.channel?.id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block"
-            >
-              <li
-                className={`mb-4 p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-lg ${getHighlightClass(
-                  index + 10
-                )}`}
-              >
-                <div className="flex items-center">
-                  <span className="text-base mr-4">{index + 11}.</span>
-                  <img
-                    src={channel.profileimgurl}
-                    alt={channel.title}
-                    className="w-10 h-10 rounded-full mr-4"
-                  />
-                  <div>
-                    <p className="text-sm">{channel.title}</p>
-                    <p className="text-xs text-gray-500">
-                      {getPrice(channel.totalSubscriptionOutflowRate)} DEGENx
-                    </p>
-                  </div>
-                </div>
-              </li>
-            </a>
-          ))}
-      </ul>
-    );
-  };
+            </div>
+          </li>
+        </a>
+      ))}
+      {channels.slice(10, 100).map(({ channel }, index) => (
+        <a
+          key={channel.channel.id}
+          href={`https://alfafrens.com/channel/${channel.channel?.id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block"
+        >
+          <li
+            className={`mb-4 p-2 rounded-md shadow-md transition-transform transform hover:scale-105 hover:shadow-lg ${getHighlightClass(
+              index + 10
+            )}`}
+          >
+            <div className="flex items-center">
+              <span className="text-base mr-4">{index + 11}.</span>
+              <img
+                src={channel.profileimgurl}
+                alt={channel.title}
+                className="w-10 h-10 rounded-full mr-4"
+              />
+              <div>
+                <p className="text-sm">{channel.title}</p>
+                <p className="text-xs text-gray-500">
+                  {getPrice(channel.totalSubscriptionOutflowRate)} DEGENx
+                </p>
+              </div>
+            </div>
+          </li>
+        </a>
+      ))}
+    </ul>
+  );
 
   return (
     <div className="mx-auto p-4 py-5 relative bg-darkBg">
@@ -216,10 +153,7 @@ const PopularityContest: React.FC = () => {
           Take subs from the Top 50 (by stake) and rank them by sub frequency.
           Updated periodically, at best.
         </p>
-        <div className="relative z-10 ">
-          {renderChannels()}
-          {!isSubscribed && <SubscribePrompt />}
-        </div>
+        <div className="relative z-10 ">{renderChannels()}</div>
       </div>
     </div>
   );
