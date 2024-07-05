@@ -9,7 +9,7 @@ import { usePrivy } from "@privy-io/react-auth";
 
 const FLOW_CONSTANT = 380517503805;
 const STAKE_CONSTANT = 100000000000000;
-const ALFAFRENS_CHANNEL_ID = "0x9d9141d98ea1b553a8d761c23c221603bd58a58b"; // Replace with actual AlfaFrens channel ID
+const ALFAFRENS_CHANNEL_ID = "0x9d9141d98ea1b553a8d761c23c221603bd58a58b";
 
 const GET_CHANNELS = gql`
   query GetChannels {
@@ -259,7 +259,10 @@ const StakeList = () => {
           Big Stake Calculator
         </h1>
         <p className="mb-6 text-lg">
-          Please log in with Farcaster to access the calculator.
+          <a href="https://alfafrens.com/channel/0x9d9141d98ea1b553a8d761c23c221603bd58a58b">
+            Zenigame AlfaFrens
+          </a>{" "}
+          Subs Only. Please log in to access the calculator.
         </p>
         <button
           onClick={() => login()}
@@ -278,7 +281,8 @@ const StakeList = () => {
           Big Stake Calculator
         </h1>
         <p className="mb-6 text-lg">
-          You need to subscribe to AlfaFrens to access the calculator.
+          You need to subscribe to Zenigame on AlfaFrens to access the
+          calculator.
         </p>
         <Link
           href={`https://alfafrens.com/channel/${ALFAFRENS_CHANNEL_ID}`}
