@@ -40,10 +40,28 @@ interface ChannelOwner {
   handle: string;
 }
 
-const MobileChannelCard = ({ channel, channelOwners, newStake, rank }) => {
+interface Channel {
+  id: string;
+  owner: string;
+  numberOfSubscribers: number;
+  currentStaked: number;
+  subscriptionFlowRatePrice: number;
+}
+
+const MobileChannelCard = ({
+  channel,
+  channelOwners,
+  newStake,
+  rank,
+}: {
+  channel: Channel;
+  channelOwners: Record<string, string>;
+  newStake: number;
+  rank: number;
+}) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const getRankColor = (rank) => {
+  const getRankColor = (rank: number) => {
     if (rank === 1)
       return "bg-yellow-600 hover:bg-yellow-500 hover:bg-opacity-40";
     if (rank === 2) return "bg-gray-400 hover:bg-gray-300 hover:bg-opacity-40";
@@ -56,9 +74,9 @@ const MobileChannelCard = ({ channel, channelOwners, newStake, rank }) => {
     Math.floor(
       ((channel.subscriptionFlowRatePrice * channel.numberOfSubscribers) /
         FLOW_CONSTANT) *
-        0.7
-    ) *
-      (newStake / (channel.currentStaked / STAKE_CONSTANT + newStake))
+        0.7 *
+        (newStake / (channel.currentStaked / STAKE_CONSTANT + newStake))
+    ).toString()
   ).toFixed(2);
 
   return (
@@ -85,12 +103,14 @@ const MobileChannelCard = ({ channel, channelOwners, newStake, rank }) => {
           <p>Subscribers: {channel.numberOfSubscribers.toLocaleString()}</p>
           <p>
             Staked:{" "}
-            {parseFloat(channel.currentStaked / STAKE_CONSTANT).toFixed(0)}
+            {parseFloat(
+              (channel.currentStaked / STAKE_CONSTANT).toString()
+            ).toFixed(0)}
           </p>
           <p>
             Price:{" "}
             {parseFloat(
-              channel.subscriptionFlowRatePrice / FLOW_CONSTANT
+              (channel.subscriptionFlowRatePrice / FLOW_CONSTANT).toString()
             ).toFixed(0)}
           </p>
         </div>
@@ -401,27 +421,31 @@ const StakeList = () => {
                   <td className="px-2 sm:px-6 py-3 whitespace-nowrap">
                     {Number(
                       parseFloat(
-                        Math.floor(
-                          ((channel.subscriptionFlowRatePrice *
-                            channel.numberOfSubscribers) /
-                            FLOW_CONSTANT) *
-                            0.7
-                        ) *
+                        (
+                          Math.floor(
+                            ((channel.subscriptionFlowRatePrice *
+                              channel.numberOfSubscribers) /
+                              FLOW_CONSTANT) *
+                              0.7
+                          ) *
                           (newStake /
                             (channel.currentStaked / STAKE_CONSTANT + newStake))
+                        ).toString()
                       ).toFixed(2)
                     ).toLocaleString()}
                   </td>
                   <td className="px-2 sm:px-6 py-3 whitespace-nowrap">
                     {Number(
                       parseFloat(
-                        Math.floor(
-                          ((channel.subscriptionFlowRatePrice *
-                            channel.numberOfSubscribers) /
-                            FLOW_CONSTANT) *
-                            0.7
-                        ) /
+                        (
+                          Math.floor(
+                            ((channel.subscriptionFlowRatePrice *
+                              channel.numberOfSubscribers) /
+                              FLOW_CONSTANT) *
+                              0.7
+                          ) /
                           (channel.currentStaked / STAKE_CONSTANT)
+                        ).toString()
                       ).toFixed(2)
                     ).toLocaleString()}
                   </td>
@@ -429,13 +453,15 @@ const StakeList = () => {
                     {channel.numberOfSubscribers.toLocaleString()}
                   </td>
                   <td className="px-2 sm:px-6 py-3 whitespace-nowrap">
-                    {parseFloat(channel.currentStaked / STAKE_CONSTANT).toFixed(
-                      0
-                    )}
+                    {parseFloat(
+                      (channel.currentStaked / STAKE_CONSTANT).toString()
+                    ).toFixed(0)}
                   </td>
                   <td className="px-2 sm:px-6 py-3 whitespace-nowrap">
                     {parseFloat(
-                      channel.subscriptionFlowRatePrice / FLOW_CONSTANT
+                      (
+                        channel.subscriptionFlowRatePrice / FLOW_CONSTANT
+                      ).toString()
                     ).toFixed(0)}
                   </td>
                 </tr>

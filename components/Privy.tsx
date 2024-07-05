@@ -12,7 +12,7 @@ const ExampleComponent: React.FC = () => {
         <button onClick={() => login()}>Sign in with Privy</button>
       ) : (
         <>
-          <p>Welcome, {user.email || user.farcaster?.displayName}!</p>
+          <p>Welcome, {user.farcaster?.displayName}!</p>
           <button onClick={() => logout()}>Log Out</button>
         </>
       )}
