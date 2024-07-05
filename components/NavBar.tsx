@@ -46,7 +46,7 @@ const NavBar: React.FC = () => {
               onClick={() => logout()}
               className="border border-secondary py-1 px-4 rounded"
             >
-              Logout
+              Log Out
             </button>
           )}
         </div>

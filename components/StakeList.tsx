@@ -301,12 +301,13 @@ const StakeList = () => {
       <div className="w-full sm:max-w-2xl mx-auto flex flex-col gap-4 my-4 p-4 bg-primary bg-opacity-10 border border-primary text-xs sm:text-sm">
         <p className="uppercase text-xs">EXPLANATION</p>
         <p>
-          This ain't your average staking tool. Optimized for return stability
-          and big stakes. Think 1000 ALFA or more.
+          This ain&apos;t your average staking tool. Optimized for return
+          stability and big stakes. Think 1000 ALFA or more.
         </p>
         <p>
-          We've only included accounts with 20 subs or more. Yeah, it's not
-          fair, but you can still use the AlfaFrens leaderboard if you want.
+          We&apos;ve only included accounts with 20 subs or more. Yeah,
+          it&apos;s not fair, but you can still use the AlfaFrens leaderboard if
+          you want.
         </p>
         <p>
           Just plug in the ALFA you want to stake, and let the calculator do its

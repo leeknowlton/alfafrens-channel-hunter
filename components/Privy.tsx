@@ -9,11 +9,11 @@ const ExampleComponent: React.FC = () => {
   return (
     <div>
       {!user ? (
-        <button onClick={() => login()}>Login with Privy</button>
+        <button onClick={() => login()}>Sign in with Privy</button>
       ) : (
         <>
           <p>Welcome, {user.email || user.farcaster?.displayName}!</p>
-          <button onClick={() => logout()}>Logout</button>
+          <button onClick={() => logout()}>Log Out</button>
         </>
       )}
     </div>
