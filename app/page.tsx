@@ -80,7 +80,7 @@ export default function Home() {
             <h2 className="text-2xl font-bold text-gray-100 text-center">
               ZENI&apos;S LIST
             </h2>
-            <div className="flex justify-center mt-2 mb-4">
+            {/* <div className="flex justify-center mt-2 mb-4">
               <Image
                 src="/popularity.png" // Replace with actual path to your Popularity Contest image
                 alt="Popularity Contest"
@@ -88,7 +88,7 @@ export default function Home() {
                 height={120}
                 className="mx-auto"
               />
-            </div>
+            </div> */}
             <div className="w-full lg:w-64 mx-auto text-center text-gray-100">
               <p className="text-sm italic mb-4">A manual labor of love.</p>
               <p className="text-sm">

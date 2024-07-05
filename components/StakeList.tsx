@@ -14,7 +14,7 @@ const ALFAFRENS_CHANNEL_ID = "0x9d9141d98ea1b553a8d761c23c221603bd58a58b";
 const GET_CHANNELS = gql`
   query GetChannels {
     channels(
-      where: { numberOfSubscribers_gt: 20 }
+      where: { numberOfSubscribers_gt: 19 }
       orderBy: numberOfSubscribers
       first: 500
     ) {
