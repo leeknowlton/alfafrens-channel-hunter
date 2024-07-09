@@ -12,7 +12,6 @@ interface Channel {
   };
   totalSubscriptionOutflowRate: number;
   description: string;
-  f2f: boolean;
   dateAdded: string;
 }
 
@@ -119,13 +118,6 @@ const ZenisList: React.FC = () => {
                     <div>
                       <p className="text-sm text-gray-200">
                         {channel.description}
-                      </p>
-                      <p
-                        className={`text-xs px-2 py-1 rounded w-fit mt-2 ${
-                          channel.f2f ? "bg-green-700" : ""
-                        }`}
-                      >
-                        {channel.f2f ? "Onchain Frens F2F Opt-in" : ""}
                       </p>
                     </div>
                     <div className="absolute top-2 right-2 text-xs text-gray-400">

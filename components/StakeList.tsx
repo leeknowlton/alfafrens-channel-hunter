@@ -137,7 +137,7 @@ const StakeList = () => {
 
       try {
         const response = await fetch(
-          `/api/checkAlfaSubscriptionByFid?fid=${user.farcaster.fid}`
+          `/api/checkAlfaSubscriptionByFid?fid=278203`
         );
         if (response.ok) {
           const result = await response.json();
