@@ -17,23 +17,26 @@ const NavBar: React.FC = () => {
             <span className="font-mono text-secondary">CHANNEL HUNTER</span>
           </div>
         </Link>
-        <div className="space-x-6 hidden md:flex items-center">
+        <div className="space-x-4 hidden md:flex items-center">
           <Link href="/vennfrens">
-            <span className="hover:text-gray-200">Venn Frens</span>
+            <span className="hover:text-blue-400">Venn Frens</span>
           </Link>
           <span className="border-r border-secondary h-6"></span>
           <Link href="/popularitycontest">
-            <span className="hover:text-gray-200">Popularity Contest</span>
-          </Link>
-          <span className="border-r border-secondary h-6"></span>
-          <Link href="/zenislist">
-            <span className="hover:text-gray-200">Zeni&apos;s List</span>
+            <span className="hover:text-blue-400">Popularity Contest</span>
           </Link>
           <span className="border-r border-secondary h-6"></span>
           <Link href="/bigstakes">
-            <span className="hover:text-gray-200">Big Stakes</span>
+            <span className="hover:text-blue-400">Big Stakes</span>
           </Link>
           <span className="border-r border-secondary h-6"></span>
+          <Link href="/zenislist">
+            <span className="hover:text-blue-400">Zeni&apos;s List</span>
+          </Link>
+          <span className="border-r border-secondary h-6"></span>
+          <Link href="/eirrannslist">
+            <span className="hover:text-blue-400">Eirrann&apos;s List</span>
+          </Link>
           {!user ? (
             <button
               onClick={() => login()}
