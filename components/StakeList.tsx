@@ -133,14 +133,16 @@ const StakeList = () => {
 
   useEffect(() => {
     async function checkSubscription() {
-      if (!user?.farcaster?.fid) return;
+      console.log("Beginning of check subscription");
+      console.log(user);
 
       try {
         const response = await fetch(
-          `/api/checkAlfaSubscriptionByFid?fid=278203`
+          `/api/checkAlfaSubscriptionByFid?fid=${user?.farcaster?.fid}`
         );
         if (response.ok) {
           const result = await response.json();
+          console.log("Setting isSubscribed to " + result.isSubscribed);
           setIsSubscribed(result.isSubscribed);
         } else {
           setIsSubscribed(false);
