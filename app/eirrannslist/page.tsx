@@ -2,7 +2,6 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import Image from "next/image";
 
 interface Channel {
   title: string;
@@ -116,7 +115,7 @@ const ZenisList: React.FC = () => {
     return Math.round(rate / 380517503805.174);
   };
 
-  const backgroundColors = ["bg-gray-800", "bg-gray-900", "bg-gray-700"];
+  const backgroundColors = [""];
 
   const openImage = (channelIndex: number, imageIndex: number) => {
     const channel = channels[channelIndex].channel;
@@ -130,9 +129,23 @@ const ZenisList: React.FC = () => {
 
   return (
     <div className="mx-auto p-4 py-5 relative bg-darkBg">
-      <h1 className="text-5xl font-bold mt-8 mb-6 text-secondary text-center font-mono">
+      <h1 className="text-5xl font-bold mt-8 mb-2 text-secondary text-center font-mono">
         Eirrann&apos;s List
       </h1>
+      <div className="container max-w-6xl mx-auto">
+        <p className="text-base italic mb-4 text-center">
+          An artist&apos;s labor of love
+        </p>
+        <div className="text-sm mb-4 bg-primary border border-dashed p-2 bg-opacity-10 border-opacity-50 max-w-2xl mx-auto">
+          <div className="uppercase text-xs ">Want to be featured?</div>
+          <p>
+            If you&apos;re an artist with an active channel, drop a line in
+            eirrann&apos;s AlfaFrens channel about your value proposition,
+            subscriber art rewards, etc. I&apos;ll sub back and we&apos;ll go
+            from there.
+          </p>
+        </div>
+      </div>
       <div className="relative z-10">
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {channels.map(({ channel }, channelIndex) => (
