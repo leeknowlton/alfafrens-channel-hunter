@@ -22,7 +22,7 @@ interface PopularChannel {
   count: number;
 }
 
-const ZenisList: React.FC = () => {
+const EirrannsList: React.FC = () => {
   const [channels, setChannels] = useState<PopularChannel[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -139,10 +139,15 @@ const ZenisList: React.FC = () => {
         <div className="text-sm mb-4 bg-primary border border-dashed p-2 bg-opacity-10 border-opacity-50 max-w-2xl mx-auto">
           <div className="uppercase text-xs ">Want to be featured?</div>
           <p>
-            If you&apos;re an artist with an active channel, drop a line in
-            eirrann&apos;s AlfaFrens channel about your value proposition,
-            subscriber art rewards, etc. I&apos;ll sub back and we&apos;ll go
-            from there.
+            If you&apos;re an artist with an active channel, drop a line in{" "}
+            <a
+              href="https://www.alfafrens.com/channel/0xe64a6015049592b9164b2369eBd2bDC5c0997B65"
+              className="underline hover:text-secondary"
+            >
+              eirrann&apos;s AlfaFrens channel
+            </a>{" "}
+            about your value proposition, subscriber art rewards, etc. I&apos;ll
+            sub back and we&apos;ll go from there.
           </p>
         </div>
       </div>
@@ -224,4 +229,4 @@ const ZenisList: React.FC = () => {
   );
 };
 
-export default ZenisList;
+export default EirrannsList;
